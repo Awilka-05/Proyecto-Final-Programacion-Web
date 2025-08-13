@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Neón</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Enlace a la hoja de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Inventario <span>Neón</span></h1>
+            <p>Gestión de inventario para tu tienda de computadoras.</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon-wrapper" style="background-color: rgba(6, 182, 212, 0.2); color: var(--color-primary);"><i data-lucide="dollar-sign"></i></div>
+                <div>
+                    <h3>Valor del Inventario</h3>
+                    <p id="totalValue">$0.00</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon-wrapper" style="background-color: rgba(167, 139, 250, 0.2); color: var(--color-secondary);"><i data-lucide="package"></i></div>
+                <div>
+                    <h3>Artículos Totales</h3>
+                    <p id="totalItems">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon-wrapper" style="background-color: rgba(250, 204, 21, 0.2); color: var(--color-warning);"><i data-lucide="alert-triangle"></i></div>
+                <div>
+                    <h3>Bajo Stock (&lt;10)</h3>
+                    <p id="lowStockItems">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-wrapper">
+                <i data-lucide="search"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre o descripción...">
+            </div>
+            <div class="view-controls-wrapper">
+                <div class="view-controls">
+                    <button id="gridViewBtn" class="active" title="Vista de Cuadrícula"><i data-lucide="layout-grid"></i></button>
+                    <button id="listViewBtn" title="Vista de Lista"><i data-lucide="list"></i></button>
+                </div>
+                <button id="add-product-btn" class="add-button"><i data-lucide="plus"></i><span>Añadir</span></button>
+            </div>
+        </div>
+        
+        <main id="product-display" class="grid">
+            <!-- Los productos se cargarán aquí dinámicamente -->
+        </main>
+    </div>
+
+    <!-- Modal para Añadir/Editar Producto -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close-btn"><i data-lucide="x"></i></button>
+            <h2 id="modal-title">Añadir Nuevo Artículo</h2>
+            <form id="product-form" class="modal-form">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label for="nombre">Nombre del Artículo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" name="cantidad" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" step="0.01" id="precio" name="precio" required min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto del Artículo</label>
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="modal-cancel-btn" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Librería de Iconos y nuestro script -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+</body>
+</html>
